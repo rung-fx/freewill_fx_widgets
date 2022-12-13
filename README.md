@@ -25,3 +25,6 @@ Text widget that you can modify TextStyle:
 Dialog that you can modify the title of the dialog
 * title
 * buttonColor
+
+## Loading
+Loading page

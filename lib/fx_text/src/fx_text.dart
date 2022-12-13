@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:freewill_fx_widgets/value_constant.dart';
 
-class TextFontStyle extends StatelessWidget {
+class FXText extends StatelessWidget {
   final String data;
   final String? fontFamily;
   final double? size;
@@ -9,11 +10,11 @@ class TextFontStyle extends StatelessWidget {
   final FontWeight? weight;
   final TextOverflow? overflow;
 
-  const TextFontStyle(
+  const FXText(
       this.data, {
         Key? key,
         this.fontFamily,
-        this.size = 12.0,
+        this.size = fontSizeS,
         this.color = Colors.black,
         this.align = TextAlign.left,
         this.weight = FontWeight.normal,

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:freewill_fx_widgets/text_font_style/src/text_font_style.dart';
+import 'package:freewill_fx_widgets/fx_text/fx_text.dart';
 import 'package:get/get.dart';
 
-class CustomAlertDialog extends StatelessWidget {
+class FXAlertDialog extends StatelessWidget {
   final String title;
   final String? content;
   final Color buttonColor;
   final Function()? onOK;
 
-  const CustomAlertDialog({
+  const FXAlertDialog({
     Key? key,
     required this.title,
     this.content,
@@ -29,7 +29,7 @@ class CustomAlertDialog extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextFontStyle(
+            FXText(
               title,
               color: Colors.black,
               size: 16.0,
@@ -41,7 +41,7 @@ class CustomAlertDialog extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 8.0),
-                  TextFontStyle(
+                  FXText(
                     content ?? '',
                     color: Colors.grey,
                     size: 14.0,
@@ -77,7 +77,7 @@ class CustomAlertDialog extends StatelessWidget {
                   vertical: 8.0,
                 ),
                 child: const Center(
-                  child: TextFontStyle(
+                  child: FXText(
                     'ตกลง',
                     size: 14.0,
                     weight: FontWeight.bold,
