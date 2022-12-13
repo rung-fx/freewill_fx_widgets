@@ -23,3 +23,5 @@ Text widget that you can modify TextStyle:
 
 ## AlertDialog
 Dialog that you can modify the title of the dialog
+* title
+* buttonColor
