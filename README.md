@@ -1,11 +1,11 @@
-# TextFontStyle
-This package is simple text widget with modifiable text style.
+# FreewillFxWidgets
+This package is simple widgets for FreewillFx Apps.
 
 ## Installation
 1. Add the latest version of package to your pubspec.yaml and run ```flutter pub get```
 ```
 dependencies:
-    freewill_fx_widgets: ^0.0.1
+    freewill_fx_widgets: ^0.0.2
 ```
 2. Import the package and use in your Flutter App
 ```
