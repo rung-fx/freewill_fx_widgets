@@ -5,7 +5,7 @@ This package is simple widgets for FreewillFx Apps.
 1. Add the latest version of package to your pubspec.yaml and run ```flutter pub get```
 ```
 dependencies:
-    freewill_fx_widgets: ^0.0.3
+    freewill_fx_widgets: ^0.0.4
 ```
 2. Import the package and use in your Flutter App
 ```
@@ -28,3 +28,16 @@ Dialog that you can modify the title of the dialog
 
 ## Loading
 Loading page
+
+## CurvedButton
+Button that you can modify the style:
+* Title
+* TestKey
+* BackgroundColor
+* Padding
+* BorderWidth
+* BorderRadius
+* BorderWidth
+* BorderColor
+* Shadow
+* TextColor

@@ -8,8 +8,11 @@ class FXCurvedButton extends StatelessWidget {
   final String title;
   final String testKey;
   final Color backgroundColor;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry padding1;
+  final EdgeInsetsGeometry padding2;
   final double borderRadius;
+  final double borderWidth;
+  final Color? borderColor;
   final List<BoxShadow>? boxShadow;
   final Color textColor;
 
@@ -20,8 +23,14 @@ class FXCurvedButton extends StatelessWidget {
     required this.onTap,
     this.testKey = '',
     this.backgroundColor = Colors.grey,
-    this.padding = EdgeInsets.zero,
+    this.padding1 = const EdgeInsets.all(10.0),
+    this.padding2 = const EdgeInsets.symmetric(
+      horizontal: margin,
+      vertical: 10.0,
+    ),
     this.borderRadius = 0.0,
+    this.borderWidth = 0.0,
+    this.borderColor,
     this.boxShadow,
     this.textColor = Colors.black,
   }) : super(key: key);
@@ -35,18 +44,25 @@ class FXCurvedButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
           width: width,
-          padding: padding,
+          padding: borderWidth == 0
+              ? padding1
+              : padding2,
           decoration: BoxDecoration(
             color: backgroundColor,
             borderRadius: BorderRadius.circular(borderRadius),
-            boxShadow: boxShadow ?? [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 1.0,
-                blurRadius: 10.0,
-                offset: const Offset(0.0, 3.0),
-              ),
-            ],
+            border: Border.all(
+              width: borderWidth,
+              color: borderWidth > 0 ? borderColor! : Colors.transparent,
+            ),
+            boxShadow: boxShadow ??
+                [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1.0,
+                    blurRadius: 10.0,
+                    offset: const Offset(0.0, 3.0),
+                  ),
+                ],
           ),
           child: Center(
             child: FXText(
