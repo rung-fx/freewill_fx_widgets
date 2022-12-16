@@ -15,6 +15,7 @@ class FXCurvedButton extends StatelessWidget {
   final Color? borderColor;
   final List<BoxShadow>? boxShadow;
   final Color textColor;
+  final double fontSize;
 
   const FXCurvedButton({
     Key? key,
@@ -33,6 +34,7 @@ class FXCurvedButton extends StatelessWidget {
     this.borderColor,
     this.boxShadow,
     this.textColor = Colors.black,
+    this.fontSize = fontSizeM,
   }) : super(key: key);
 
   @override
@@ -69,7 +71,7 @@ class FXCurvedButton extends StatelessWidget {
               title,
               color: textColor,
               weight: FontWeight.bold,
-              size: fontSizeM,
+              size: fontSize,
             ),
           ),
         ),

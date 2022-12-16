@@ -10,6 +10,10 @@ Updated README.md
 
 Added LoadingPage, CurvedButton and change class name of the package
 
-## 0.04
+## 0.0.4
+
+Editing CurvedButton function
+
+## 0.0.5
 
 Editing CurvedButton function
