@@ -26,8 +26,8 @@ class FXCurvedButton extends StatelessWidget {
     this.backgroundColor = Colors.grey,
     this.padding1 = const EdgeInsets.all(10.0),
     this.padding2 = const EdgeInsets.symmetric(
-      horizontal: margin,
-      vertical: 10.0,
+      horizontal: 10.0,
+      vertical: margin,
     ),
     this.borderRadius = 0.0,
     this.borderWidth = 0.0,

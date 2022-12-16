@@ -17,3 +17,7 @@ Editing CurvedButton function
 ## 0.0.5
 
 Editing CurvedButton function
+
+## 0.0.6
+
+Editing CurvedButton padding2 size
