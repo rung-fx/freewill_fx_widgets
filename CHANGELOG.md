@@ -21,3 +21,7 @@ Editing CurvedButton function
 ## 0.0.6
 
 Editing CurvedButton padding2 size
+
+## 0.0.7
+
+Added underline text in TextFontStyle

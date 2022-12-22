@@ -8,6 +8,7 @@ class FXText extends StatelessWidget {
   final Color? color;
   final TextAlign? align;
   final FontWeight? weight;
+  final TextDecoration? underline;
   final TextOverflow? overflow;
 
   const FXText(
@@ -18,6 +19,7 @@ class FXText extends StatelessWidget {
         this.color = Colors.black,
         this.align = TextAlign.left,
         this.weight = FontWeight.normal,
+        this.underline = TextDecoration.none,
         this.overflow,
       }) : super(key: key);
 
@@ -31,6 +33,7 @@ class FXText extends StatelessWidget {
         fontSize: size,
         color: color,
         fontWeight: weight,
+        decoration: underline,
         overflow: overflow,
       ),
     );

@@ -5,7 +5,7 @@ This package is simple widgets for FreewillFx Apps.
 1. Add the latest version of package to your pubspec.yaml and run ```flutter pub get```
 ```
 dependencies:
-    freewill_fx_widgets: ^0.0.6
+    freewill_fx_widgets: ^0.0.7
 ```
 2. Import the package and use in your Flutter App
 ```
@@ -20,6 +20,7 @@ Text widget that you can modify TextStyle:
 * TextAlign
 * FontWeight
 * TextOverflow
+* Underline
 
 ## AlertDialog
 Dialog that you can modify the title of the dialog
