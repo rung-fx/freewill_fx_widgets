@@ -25,3 +25,7 @@ Editing CurvedButton padding2 size
 ## 0.0.7
 
 Added underline text in TextFontStyle
+
+## 0.0.8
+
+Added PermissionHandler, ImagePicker
