@@ -4,6 +4,25 @@ import 'package:freewill_fx_widgets/fx_gallery_view/src/fx_gallery_image_type.da
 import 'package:freewill_fx_widgets/fx_page_indicator/src/fx_page_indicator.dart';
 import 'package:get/get.dart';
 
+showGalleryView(
+  List<FXGalleryImage> itemList, {
+  Color barrierColor = Colors.black38,
+  bool barrierDismissible = true,
+}) {
+  Get.generalDialog(
+    barrierLabel: '',
+    barrierColor: barrierColor,
+    barrierDismissible: barrierDismissible,
+    pageBuilder: (context, animation, secondaryAnimation) {
+      return SafeArea(
+        child: FXGalleryPage(
+          itemList: itemList,
+        ),
+      );
+    },
+  );
+}
+
 class FXGalleryPage extends StatefulWidget {
   final List<FXGalleryImage> itemList;
   final Color backgroundColor;

@@ -37,3 +37,7 @@ Editing PermissionHandler, ImagePicker
 ## 1.0.0
 
 Added PageIndicator, GalleryView
+
+## 1.0.1
+
+Editing GalleryView
