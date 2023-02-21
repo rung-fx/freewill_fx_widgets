@@ -29,3 +29,7 @@ Added underline text in TextFontStyle
 ## 0.0.8
 
 Added PermissionHandler, ImagePicker
+
+## 0.0.9
+
+Editing PermissionHandler, ImagePicker
