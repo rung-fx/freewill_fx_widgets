@@ -4,10 +4,14 @@ import 'package:freewill_fx_widgets/fx_gallery_view/src/fx_gallery_image_type.da
 import 'package:freewill_fx_widgets/fx_page_indicator/src/fx_page_indicator.dart';
 import 'package:get/get.dart';
 
-showGalleryView(
-  List<FXGalleryImage> itemList, {
-  Color barrierColor = Colors.black38,
+showFXGalleryView({
+  required List<FXGalleryImage> itemList,
   bool barrierDismissible = true,
+  Color barrierColor = Colors.black38,
+  Color textColor = Colors.white,
+  Color indicatorActiveColor = Colors.white,
+  Color indicatorInactiveColor = Colors.white54,
+  Color descriptionBackgroundColor = Colors.black26,
 }) {
   Get.generalDialog(
     barrierLabel: '',
@@ -17,6 +21,10 @@ showGalleryView(
       return SafeArea(
         child: FXGalleryPage(
           itemList: itemList,
+          textColor: textColor,
+          indicatorActiveColor: indicatorActiveColor,
+          indicatorInactiveColor: indicatorInactiveColor,
+          descriptionBackgroundColor: descriptionBackgroundColor,
         ),
       );
     },
@@ -29,14 +37,16 @@ class FXGalleryPage extends StatefulWidget {
   final Color textColor;
   final Color indicatorActiveColor;
   final Color indicatorInactiveColor;
+  final Color descriptionBackgroundColor;
 
   const FXGalleryPage({
     Key? key,
     required this.itemList,
     this.backgroundColor = Colors.transparent,
     this.textColor = Colors.white,
-    this.indicatorActiveColor = Colors.blue,
-    this.indicatorInactiveColor = Colors.white10,
+    this.indicatorActiveColor = Colors.white,
+    this.indicatorInactiveColor = Colors.white54,
+    this.descriptionBackgroundColor = Colors.black26,
   }) : super(key: key);
 
   @override
@@ -79,41 +89,50 @@ class _FXGalleryPageState extends State<FXGalleryPage> {
                 itemBuilder: (context, index) {
                   FXGalleryImage item = widget.itemList[index];
 
-                  return InteractiveViewer(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InteractiveViewer(
                       child: _imageWidget(item),
                     ),
                   );
                 },
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          _currentItem?.description ?? '',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: widget.textColor,
-                          ),
+            Visibility(
+              visible: _currentItem?.description != null &&
+                  _currentItem?.description != '',
+              child: Container(
+                margin: const EdgeInsets.only(
+                  left: 8.0,
+                  right: 8.0,
+                  bottom: 8.0,
+                ),
+                padding: const EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: widget.descriptionBackgroundColor,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _currentItem?.description ?? '',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: widget.textColor,
                         ),
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 20.0),
-                  FXPageIndicator(
-                    pageSize: widget.itemList.length,
-                    currentPage: _currentIndex,
-                    activeColor: widget.indicatorActiveColor,
-                    inactiveColor: widget.indicatorInactiveColor,
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
+            ),
+            const SizedBox(height: 8.0),
+            FXPageIndicator(
+              pageSize: widget.itemList.length,
+              currentPage: _currentIndex,
+              activeColor: widget.indicatorActiveColor,
+              inactiveColor: widget.indicatorInactiveColor,
             ),
           ],
         ),

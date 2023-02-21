@@ -41,3 +41,7 @@ Added PageIndicator, GalleryView
 ## 1.0.1
 
 Editing GalleryView
+
+## 1.0.2
+
+Editing GalleryView
