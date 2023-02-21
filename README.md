@@ -66,3 +66,7 @@ Button that you can modify the style:
 
 - From camera
 - From gallery
+
+## PageIndicator
+
+## GalleryView

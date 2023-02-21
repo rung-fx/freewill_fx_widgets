@@ -1,0 +1,4 @@
+enum FXGalleryImageType {
+  network,
+  asset,
+}
