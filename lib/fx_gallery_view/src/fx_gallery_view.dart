@@ -182,18 +182,18 @@ class _FXGalleryPageState extends State<FXGalleryPage> {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(
+          children: const [
+            Icon(
               Icons.broken_image_outlined,
               size: 40.0,
               color: Colors.white,
             ),
-            const SizedBox(height: 16.0),
+            SizedBox(height: 16.0),
             Text(
               'Cannot load image',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: widget.textColor,
+                color: Colors.white,
               ),
             ),
           ],
