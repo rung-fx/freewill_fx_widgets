@@ -12,6 +12,7 @@ showFXGalleryView({
   Color indicatorActiveColor = Colors.white,
   Color indicatorInactiveColor = Colors.white54,
   Color descriptionBackgroundColor = Colors.black26,
+  Widget Function(BuildContext, Object, StackTrace?)? errorBuilder,
 }) {
   Get.generalDialog(
     barrierLabel: '',
@@ -25,6 +26,7 @@ showFXGalleryView({
           indicatorActiveColor: indicatorActiveColor,
           indicatorInactiveColor: indicatorInactiveColor,
           descriptionBackgroundColor: descriptionBackgroundColor,
+          errorBuilder: errorBuilder,
         ),
       );
     },
@@ -38,6 +40,7 @@ class FXGalleryPage extends StatefulWidget {
   final Color indicatorActiveColor;
   final Color indicatorInactiveColor;
   final Color descriptionBackgroundColor;
+  final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
 
   const FXGalleryPage({
     Key? key,
@@ -47,6 +50,7 @@ class FXGalleryPage extends StatefulWidget {
     this.indicatorActiveColor = Colors.white,
     this.indicatorInactiveColor = Colors.white54,
     this.descriptionBackgroundColor = Colors.black26,
+    this.errorBuilder,
   }) : super(key: key);
 
   @override
@@ -143,25 +147,58 @@ class _FXGalleryPageState extends State<FXGalleryPage> {
   _imageWidget(FXGalleryImage item) {
     switch (item.imageType) {
       case FXGalleryImageType.network:
-        return Image.network(item.imagePath);
+        return Image.network(
+          item.imagePath,
+          errorBuilder: widget.errorBuilder ?? _defaultErrorBuilder,
+        );
 
       case FXGalleryImageType.asset:
-        return Image.asset(item.imagePath);
+        return Image.asset(
+          item.imagePath,
+          errorBuilder: widget.errorBuilder ?? _defaultErrorBuilder,
+        );
 
       default:
-        return Container(
-          color: Colors.white,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(
-                Icons.broken_image_outlined,
-                size: 40.0,
-                color: Colors.black12,
-              ),
-            ],
-          ),
-        );
+        return _brokenImage();
     }
+  }
+
+  Widget _defaultErrorBuilder(
+    BuildContext context,
+    Object obj,
+    StackTrace? trace,
+  ) {
+    return _brokenImage();
+  }
+
+  _brokenImage() {
+    return Center(
+      child: Container(
+        width: 180.0,
+        height: 100.0,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.0),
+          color: Colors.black38,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.broken_image_outlined,
+              size: 40.0,
+              color: Colors.white,
+            ),
+            const SizedBox(height: 16.0),
+            Text(
+              'Cannot load image',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: widget.textColor,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

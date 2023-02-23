@@ -45,3 +45,7 @@ Editing GalleryView
 ## 1.0.2
 
 Editing GalleryView
+
+## 1.0.3
+
+Handle broken image in GalleryView
