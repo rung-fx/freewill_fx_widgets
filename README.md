@@ -70,3 +70,17 @@ Button that you can modify the style:
 ## PageIndicator
 
 ## GalleryView
+
+## CropImage
+
+In showImageBottomSheet -> cropImage = true
+
+Example: 
+```
+File? file = await showImagePickerBottomSheet(
+    color: Colors.black,
+    cropImage: true,
+);
+
+setState(() => _image = file);
+```

@@ -5,6 +5,7 @@ import 'package:freewill_fx_widgets/fx_alert_dialog/src/fx_alert_dialog.dart';
 import 'package:freewill_fx_widgets/fx_image_picker/src/fx_camera_page.dart';
 import 'package:freewill_fx_widgets/fx_permission/src/fx_permission.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 const double imageSize = 640.0;
@@ -14,77 +15,162 @@ enum ImagePickerSource {
   gallery,
 }
 
-Future<File?> showImagePickerBottomSheet() async {
-  ImagePickerSource? result = await Get.bottomSheet(
-    Container(
-      color: Colors.white,
-      child: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ListTile(
-              contentPadding: const EdgeInsets.all(8.0),
-              leading: const Icon(
-                Icons.camera_alt,
-                color: Colors.blue,
-              ),
-              title: const Text(
-                'กล้อง',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.blue,
+Future<File?> showImagePickerBottomSheet({
+  required bool cropImage,
+  required Color color,
+  File? image,
+  double? ratioX,
+  double? ratioY,
+}) async {
+  if (cropImage = true) {
+    File? result = await Get.bottomSheet(
+      Container(
+        color: Colors.white,
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                contentPadding: const EdgeInsets.all(8.0),
+                leading: Icon(
+                  Icons.camera_alt,
+                  color: color,
                 ),
-              ),
-              onTap: () async {
-                Get.back(result: ImagePickerSource.camera);
-              },
-            ),
-            const Divider(),
-            ListTile(
-              contentPadding: const EdgeInsets.all(8.0),
-              leading: const Icon(
-                Icons.photo,
-                color: Colors.blue,
-              ),
-              title: const Text(
-                'แกลลอรี่',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.blue,
+                title: Text(
+                  'กล้อง',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: color,
+                  ),
                 ),
+                onTap: () async {
+                  final cameras = await availableCameras();
+
+                  File? file = await Get.to(
+                    () => FXCameraPage(
+                      cameras: cameras,
+                      resolution: ResolutionPreset.medium,
+                    ),
+                  );
+
+                  image = await cameraCrop(
+                    file!.path,
+                    ratioX: ratioX ?? 1.0,
+                    ratioY: ratioY ?? 1.0,
+                  );
+
+                  Get.back(result: image);
+                },
               ),
-              onTap: () async {
-                Get.back(result: ImagePickerSource.gallery);
-              },
-            ),
-          ],
+              const Divider(),
+              ListTile(
+                contentPadding: const EdgeInsets.all(8.0),
+                leading: Icon(
+                  Icons.photo,
+                  color: color,
+                ),
+                title: Text(
+                  'แกลลอรี่',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: color,
+                  ),
+                ),
+                onTap: () async {
+                  final file = await ImagePicker().pickImage(
+                    source: ImageSource.gallery,
+                    maxHeight: imageSize,
+                    maxWidth: imageSize,
+                  );
+
+                  image = await cameraCrop(
+                    file!.path,
+                    ratioX: ratioX ?? 1.0,
+                    ratioY: ratioY ?? 1.0,
+                  );
+
+                  Get.back(result: image);
+                },
+              ),
+            ],
+          ),
         ),
       ),
-    ),
-  );
+    );
 
-  File? pickedFile;
+    return result;
+  } else {
+    ImagePickerSource? result = await Get.bottomSheet(
+      Container(
+        color: Colors.white,
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                  contentPadding: const EdgeInsets.all(8.0),
+                  leading: Icon(
+                    Icons.camera_alt,
+                    color: color,
+                  ),
+                  title: Text(
+                    'กล้อง',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: color,
+                    ),
+                  ),
+                  onTap: () async {
+                    Get.back(result: ImagePickerSource.camera);
+                  }),
+              const Divider(),
+              ListTile(
+                  contentPadding: const EdgeInsets.all(8.0),
+                  leading: Icon(
+                    Icons.photo,
+                    color: color,
+                  ),
+                  title: Text(
+                    'แกลลอรี่',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: color,
+                    ),
+                  ),
+                  onTap: () async {
+                    Get.back(result: ImagePickerSource.gallery);
+                  }),
+            ],
+          ),
+        ),
+      ),
+    );
 
-  if (result == ImagePickerSource.camera) {
-    if (Platform.isAndroid) {
-      final cameras = await availableCameras();
-      final camera = cameras.first;
-      final imagePath = await Get.to(
-        () => FXCameraPage(camera: camera),
-      );
+    File? pickedFile;
 
-      pickedFile = File(imagePath);
-    } else if (Platform.isIOS) {
-      pickedFile = await getImageFromCamera();
+    if (result == ImagePickerSource.camera) {
+      if (Platform.isAndroid) {
+        final cameras = await availableCameras();
+        final imagePath = await Get.to(
+          () => FXCameraPage(
+            cameras: cameras,
+            resolution: ResolutionPreset.medium,
+          ),
+        );
+
+        pickedFile = File(imagePath);
+      } else if (Platform.isIOS) {
+        pickedFile = await getImageFromCamera(color);
+      }
+    } else if (result == ImagePickerSource.gallery) {
+      pickedFile = await getImageFromGallery(color);
     }
-  } else if (result == ImagePickerSource.gallery) {
-    pickedFile = await getImageFromGallery();
-  }
 
-  return pickedFile;
+    return pickedFile;
+  }
 }
 
-getImageFromCamera() async {
+getImageFromCamera(Color buttonColor) async {
   bool cameraEnabled = await fxCanAccessCamera();
   File? file;
 
@@ -101,9 +187,9 @@ getImageFromCamera() async {
     }
   } else {
     Get.dialog(
-      const FXAlertDialog(
+      FXAlertDialog(
         title: 'กรุณาตรวจสอบสิทธิ์ในการใช้งานกล้อง',
-        buttonColor: Colors.blue,
+        buttonColor: buttonColor,
       ),
     );
   }
@@ -111,7 +197,7 @@ getImageFromCamera() async {
   return file;
 }
 
-getImageFromGallery() async {
+getImageFromGallery(Color buttonColor) async {
   bool galleryEnabled = await fxCanAccessGallery();
   File? file;
 
@@ -128,12 +214,79 @@ getImageFromGallery() async {
     }
   } else {
     Get.dialog(
-      const FXAlertDialog(
+      FXAlertDialog(
         title: 'กรุณาตรวจสอบสิทธิ์ในการเข้าแกลลอรี่',
-        buttonColor: Colors.blue,
+        buttonColor: buttonColor,
       ),
     );
   }
+
+  return file;
+}
+
+Future<File?> cameraCrop(
+  filePath, {
+  required double ratioX,
+  required double ratioY,
+}) async {
+  var aspectRatio = CropAspectRatio(
+    ratioX: ratioX,
+    ratioY: ratioY,
+  );
+  CroppedFile? croppedImage = await ImageCropper().cropImage(
+    sourcePath: filePath,
+    maxWidth: 720,
+    maxHeight: 720,
+    aspectRatio: aspectRatio,
+    cropStyle: CropStyle.rectangle,
+    uiSettings: [
+      IOSUiSettings(
+        rotateClockwiseButtonHidden: true,
+        rotateButtonsHidden: true,
+        resetButtonHidden: true,
+        aspectRatioPickerButtonHidden: true,
+        aspectRatioLockDimensionSwapEnabled: true,
+        aspectRatioLockEnabled: true,
+      ),
+      AndroidUiSettings(
+        toolbarTitle: 'Crop Image',
+        toolbarColor: Colors.red,
+        toolbarWidgetColor: Colors.white,
+        hideBottomControls: true,
+      ),
+    ],
+  );
+
+  File? file = File(croppedImage!.path);
+
+  return file;
+}
+
+Future<File?> galleryCrop(File imageFile) async {
+  CroppedFile? croppedImage = await ImageCropper().cropImage(
+    sourcePath: imageFile.path,
+    aspectRatioPresets: [
+      CropAspectRatioPreset.original,
+      CropAspectRatioPreset.square,
+      CropAspectRatioPreset.ratio3x2,
+      CropAspectRatioPreset.ratio4x3,
+    ],
+    uiSettings: [
+      IOSUiSettings(
+        aspectRatioLockEnabled: false,
+        resetAspectRatioEnabled: false,
+      ),
+      AndroidUiSettings(
+        toolbarTitle: 'Crop Image',
+        toolbarColor: Colors.red,
+        toolbarWidgetColor: Colors.white,
+        initAspectRatio: CropAspectRatioPreset.original,
+        lockAspectRatio: false,
+      ),
+    ],
+  );
+
+  File? file = File(croppedImage!.path);
 
   return file;
 }

@@ -49,3 +49,8 @@ Editing GalleryView
 ## 1.0.3
 
 Handle broken image in GalleryView
+
+
+## 1.1.0
+
+Edit ShowImagePickerBottomSheet, Add cropImage function
