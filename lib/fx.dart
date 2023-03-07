@@ -8,3 +8,4 @@ export 'fx_image_picker/fx_image_picker.dart';
 export 'fx_permission/fx_permission.dart';
 export 'fx_gallery_view/fx_gallery_view.dart';
 export 'fx_page_indicator/fx_page_indicator.dart';
+export 'fx_qr_scanner/fx_qr_scanner.dart';

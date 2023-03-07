@@ -22,7 +22,7 @@ Future<File?> showImagePickerBottomSheet({
   double? ratioX,
   double? ratioY,
 }) async {
-  if (cropImage = true) {
+  if (cropImage) {
     File? result = await Get.bottomSheet(
       Container(
         color: Colors.white,

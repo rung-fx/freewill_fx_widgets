@@ -50,7 +50,14 @@ Editing GalleryView
 
 Handle broken image in GalleryView
 
-
 ## 1.1.0
 
 Edit ShowImagePickerBottomSheet, Add cropImage function
+
+## 1.2.0
+
+Add qrCodeScanner
+
+## 1.2.1
+
+fix bug ShowImagePickerBottomSheet

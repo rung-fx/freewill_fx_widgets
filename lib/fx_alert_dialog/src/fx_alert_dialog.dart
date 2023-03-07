@@ -12,7 +12,7 @@ class FXAlertDialog extends StatelessWidget {
     Key? key,
     required this.title,
     this.content,
-    required this.buttonColor,
+    this.buttonColor = Colors.grey,
     this.onOK,
   }) : super(key: key);
 

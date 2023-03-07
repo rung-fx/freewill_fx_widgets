@@ -8,7 +8,7 @@ This package is simple widgets for FreewillFx Apps.
 
 ```
 dependencies:
-    freewill_fx_widgets: ^1.0.3
+    freewill_fx_widgets: ^1.2.1
 ```
 
 2. Import the package and use in your Flutter App
@@ -83,4 +83,15 @@ File? file = await showImagePickerBottomSheet(
 );
 
 setState(() => _image = file);
+```
+
+## QRCodeScanner
+
+Example: 
+```
+Barcode? result = await Get.to(() => FXQrScanner());
+
+if (result != null) {
+    setState(() => qrResult = result);
+}
 ```
