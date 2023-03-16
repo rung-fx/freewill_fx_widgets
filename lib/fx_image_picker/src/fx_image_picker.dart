@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:freewill_fx_widgets/fx.dart';
 import 'package:freewill_fx_widgets/fx_alert_dialog/src/fx_alert_dialog.dart';
 import 'package:freewill_fx_widgets/fx_image_picker/src/fx_camera_page.dart';
 import 'package:freewill_fx_widgets/fx_permission/src/fx_permission.dart';
@@ -18,8 +19,9 @@ enum ImagePickerSource {
 
 Future<File?> showImagePickerBottomSheet({
   required bool cropImage,
-  Color color = Colors.grey,
-  double padding = margin,
+  Color iconColor = Colors.grey,
+  Color fontColor = Colors.black,
+  EdgeInsetsGeometry padding = EdgeInsets.zero,
   double fontSize = fontSizeL,
   File? image,
   double? ratioX,
@@ -34,17 +36,16 @@ Future<File?> showImagePickerBottomSheet({
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                contentPadding: EdgeInsets.all(padding),
+                contentPadding: padding,
                 leading: Icon(
                   Icons.camera_alt,
-                  color: color,
+                  color: iconColor,
                 ),
-                title: Text(
+                title: FXText(
                   'กล้อง',
-                  style: TextStyle(
-                    fontSize: fontSize,
-                    color: color,
-                  ),
+                  size: fontSize,
+                  weight: FontWeight.bold,
+                  color: fontColor,
                 ),
                 onTap: () async {
                   final cameras = await availableCameras();
@@ -67,17 +68,16 @@ Future<File?> showImagePickerBottomSheet({
               ),
               const Divider(),
               ListTile(
-                contentPadding: EdgeInsets.all(padding),
+                contentPadding: padding,
                 leading: Icon(
                   Icons.photo,
-                  color: color,
+                  color: iconColor,
                 ),
-                title: Text(
+                title: FXText(
                   'แกลลอรี่',
-                  style: TextStyle(
-                    fontSize: fontSize,
-                    color: color,
-                  ),
+                  size: fontSize,
+                  weight: FontWeight.bold,
+                  color: fontColor,
                 ),
                 onTap: () async {
                   final file = await ImagePicker().pickImage(
@@ -111,38 +111,38 @@ Future<File?> showImagePickerBottomSheet({
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                  contentPadding: EdgeInsets.all(padding),
-                  leading: Icon(
-                    Icons.camera_alt,
-                    color: color,
-                  ),
-                  title: Text(
-                    'กล้อง',
-                    style: TextStyle(
-                      fontSize: fontSize,
-                      color: color,
-                    ),
-                  ),
-                  onTap: () async {
-                    Get.back(result: ImagePickerSource.camera);
-                  }),
+                contentPadding: padding,
+                leading: Icon(
+                  Icons.camera_alt,
+                  color: iconColor,
+                ),
+                title: FXText(
+                  'กล้อง',
+                  size: fontSize,
+                  weight: FontWeight.bold,
+                  color: fontColor,
+                ),
+                onTap: () async {
+                  Get.back(result: ImagePickerSource.camera);
+                },
+              ),
               const Divider(),
               ListTile(
-                  contentPadding: EdgeInsets.all(padding),
-                  leading: Icon(
-                    Icons.photo,
-                    color: color,
-                  ),
-                  title: Text(
-                    'แกลลอรี่',
-                    style: TextStyle(
-                      fontSize: fontSize,
-                      color: color,
-                    ),
-                  ),
-                  onTap: () async {
-                    Get.back(result: ImagePickerSource.gallery);
-                  }),
+                contentPadding: padding,
+                leading: Icon(
+                  Icons.photo,
+                  color: iconColor,
+                ),
+                title: FXText(
+                  'แกลลอรี่',
+                  size: fontSize,
+                  weight: FontWeight.bold,
+                  color: fontColor,
+                ),
+                onTap: () async {
+                  Get.back(result: ImagePickerSource.gallery);
+                },
+              ),
             ],
           ),
         ),
@@ -163,10 +163,10 @@ Future<File?> showImagePickerBottomSheet({
 
         pickedFile = File(imagePath);
       } else if (Platform.isIOS) {
-        pickedFile = await getImageFromCamera(color);
+        pickedFile = await getImageFromCamera(iconColor);
       }
     } else if (result == ImagePickerSource.gallery) {
-      pickedFile = await getImageFromGallery(color);
+      pickedFile = await getImageFromGallery(iconColor);
     }
 
     return pickedFile;

@@ -65,3 +65,7 @@ fix bug ShowImagePickerBottomSheet
 ## 1.2.2
 
 Edit ShowImagePickerBottomSheet color and padding size of ListTile
+
+## 1.2.3
+
+Edit ShowImagePickerBottomSheet color and padding size of ListTile
