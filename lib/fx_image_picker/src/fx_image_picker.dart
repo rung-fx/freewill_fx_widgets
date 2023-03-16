@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:freewill_fx_widgets/fx_alert_dialog/src/fx_alert_dialog.dart';
 import 'package:freewill_fx_widgets/fx_image_picker/src/fx_camera_page.dart';
 import 'package:freewill_fx_widgets/fx_permission/src/fx_permission.dart';
+import 'package:freewill_fx_widgets/value_constant.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,7 +18,9 @@ enum ImagePickerSource {
 
 Future<File?> showImagePickerBottomSheet({
   required bool cropImage,
-  required Color color,
+  Color color = Colors.grey,
+  double padding = margin,
+  double fontSize = fontSizeL,
   File? image,
   double? ratioX,
   double? ratioY,
@@ -31,7 +34,7 @@ Future<File?> showImagePickerBottomSheet({
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                contentPadding: const EdgeInsets.all(8.0),
+                contentPadding: EdgeInsets.all(padding),
                 leading: Icon(
                   Icons.camera_alt,
                   color: color,
@@ -39,7 +42,7 @@ Future<File?> showImagePickerBottomSheet({
                 title: Text(
                   'กล้อง',
                   style: TextStyle(
-                    fontSize: 20.0,
+                    fontSize: fontSize,
                     color: color,
                   ),
                 ),
@@ -64,7 +67,7 @@ Future<File?> showImagePickerBottomSheet({
               ),
               const Divider(),
               ListTile(
-                contentPadding: const EdgeInsets.all(8.0),
+                contentPadding: EdgeInsets.all(padding),
                 leading: Icon(
                   Icons.photo,
                   color: color,
@@ -72,7 +75,7 @@ Future<File?> showImagePickerBottomSheet({
                 title: Text(
                   'แกลลอรี่',
                   style: TextStyle(
-                    fontSize: 20.0,
+                    fontSize: fontSize,
                     color: color,
                   ),
                 ),
@@ -108,7 +111,7 @@ Future<File?> showImagePickerBottomSheet({
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                  contentPadding: const EdgeInsets.all(8.0),
+                  contentPadding: EdgeInsets.all(padding),
                   leading: Icon(
                     Icons.camera_alt,
                     color: color,
@@ -116,7 +119,7 @@ Future<File?> showImagePickerBottomSheet({
                   title: Text(
                     'กล้อง',
                     style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: fontSize,
                       color: color,
                     ),
                   ),
@@ -125,7 +128,7 @@ Future<File?> showImagePickerBottomSheet({
                   }),
               const Divider(),
               ListTile(
-                  contentPadding: const EdgeInsets.all(8.0),
+                  contentPadding: EdgeInsets.all(padding),
                   leading: Icon(
                     Icons.photo,
                     color: color,
@@ -133,7 +136,7 @@ Future<File?> showImagePickerBottomSheet({
                   title: Text(
                     'แกลลอรี่',
                     style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: fontSize,
                       color: color,
                     ),
                   ),
