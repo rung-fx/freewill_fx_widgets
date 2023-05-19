@@ -60,7 +60,7 @@ Add qrCodeScanner
 
 ## 1.2.1
 
-fix bug ShowImagePickerBottomSheet
+Fix bug ShowImagePickerBottomSheet
 
 ## 1.2.2
 
@@ -69,3 +69,7 @@ Edit ShowImagePickerBottomSheet color and padding size of ListTile
 ## 1.2.3
 
 Edit ShowImagePickerBottomSheet color and padding size of ListTile
+
+## 1.2.4
+
+Fix camera bug from imagepicker

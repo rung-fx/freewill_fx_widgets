@@ -2,9 +2,6 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:freewill_fx_widgets/fx.dart';
-import 'package:freewill_fx_widgets/fx_alert_dialog/src/fx_alert_dialog.dart';
-import 'package:freewill_fx_widgets/fx_image_picker/src/fx_camera_page.dart';
-import 'package:freewill_fx_widgets/fx_permission/src/fx_permission.dart';
 import 'package:freewill_fx_widgets/value_constant.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -154,14 +151,12 @@ Future<File?> showImagePickerBottomSheet({
     if (result == ImagePickerSource.camera) {
       if (Platform.isAndroid) {
         final cameras = await availableCameras();
-        final imagePath = await Get.to(
+        pickedFile = await Get.to(
           () => FXCameraPage(
             cameras: cameras,
             resolution: ResolutionPreset.medium,
           ),
         );
-
-        pickedFile = File(imagePath);
       } else if (Platform.isIOS) {
         pickedFile = await getImageFromCamera(iconColor);
       }
