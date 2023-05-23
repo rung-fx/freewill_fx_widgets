@@ -73,3 +73,11 @@ Edit ShowImagePickerBottomSheet color and padding size of ListTile
 ## 1.2.4
 
 Fix camera bug from imagepicker
+
+## 1.2.5
+
+device_info package version conflicts
+
+## 1.2.6
+
+device_info package version conflicts, package_info package version conflicts
