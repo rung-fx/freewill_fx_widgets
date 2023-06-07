@@ -226,6 +226,11 @@ Future<File?> cameraCrop(
   filePath, {
   required double ratioX,
   required double ratioY,
+  String toolbarTitle = 'Crop Image',
+  Color toolbarColor = Colors.red,
+  Color toolbarWidgetColor = Colors.white,
+  bool hideBottomControls = true,
+      bool lockAspectRatio = false,
 }) async {
   var aspectRatio = CropAspectRatio(
     ratioX: ratioX,
@@ -247,10 +252,11 @@ Future<File?> cameraCrop(
         aspectRatioLockEnabled: true,
       ),
       AndroidUiSettings(
-        toolbarTitle: 'Crop Image',
-        toolbarColor: Colors.red,
-        toolbarWidgetColor: Colors.white,
-        hideBottomControls: true,
+        toolbarTitle: toolbarTitle,
+        toolbarColor: toolbarColor,
+        toolbarWidgetColor: toolbarWidgetColor,
+        hideBottomControls: hideBottomControls,
+        lockAspectRatio: lockAspectRatio,
       ),
     ],
   );

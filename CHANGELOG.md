@@ -81,3 +81,7 @@ device_info package version conflicts
 ## 1.2.6
 
 device_info package version conflicts, package_info package version conflicts
+
+## 1.2.7
+
+edit image picker crop function
