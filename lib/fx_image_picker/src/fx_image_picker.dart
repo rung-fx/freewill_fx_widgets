@@ -18,11 +18,15 @@ Future<File?> showImagePickerBottomSheet({
   required bool cropImage,
   Color iconColor = Colors.grey,
   Color fontColor = Colors.black,
-  EdgeInsetsGeometry padding = EdgeInsets.zero,
-  double fontSize = fontSizeL,
+  EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: marginX2),
+  double modalFontSize = fontSizeL,
   File? image,
-  double? ratioX,
-  double? ratioY,
+  CropAspectRatio? aspectRatio,
+  String toolBarTitle = 'Crop Image',
+  Color toolbarColor = Colors.grey,
+  Color toolbarWidgetColor = Colors.white,
+  bool hideBottomControls = true,
+  bool lockAspectRatio = false,
 }) async {
   if (cropImage) {
     File? result = await Get.bottomSheet(
@@ -40,7 +44,7 @@ Future<File?> showImagePickerBottomSheet({
                 ),
                 title: FXText(
                   'กล้อง',
-                  size: fontSize,
+                  size: modalFontSize,
                   weight: FontWeight.bold,
                   color: fontColor,
                 ),
@@ -56,8 +60,12 @@ Future<File?> showImagePickerBottomSheet({
 
                   image = await cameraCrop(
                     file!.path,
-                    ratioX: ratioX ?? 1.0,
-                    ratioY: ratioY ?? 1.0,
+                    aspectRatio: aspectRatio,
+                    toolbarTitle: toolBarTitle,
+                    toolbarColor: toolbarColor,
+                    toolbarWidgetColor: toolbarWidgetColor,
+                    hideBottomControls: hideBottomControls,
+                    lockAspectRatio: lockAspectRatio,
                   );
 
                   Get.back(result: image);
@@ -72,7 +80,7 @@ Future<File?> showImagePickerBottomSheet({
                 ),
                 title: FXText(
                   'แกลลอรี่',
-                  size: fontSize,
+                  size: modalFontSize,
                   weight: FontWeight.bold,
                   color: fontColor,
                 ),
@@ -85,8 +93,12 @@ Future<File?> showImagePickerBottomSheet({
 
                   image = await cameraCrop(
                     file!.path,
-                    ratioX: ratioX ?? 1.0,
-                    ratioY: ratioY ?? 1.0,
+                    aspectRatio: aspectRatio,
+                    toolbarTitle: toolBarTitle,
+                    toolbarColor: toolbarColor,
+                    toolbarWidgetColor: toolbarWidgetColor,
+                    hideBottomControls: hideBottomControls,
+                    lockAspectRatio: lockAspectRatio,
                   );
 
                   Get.back(result: image);
@@ -115,7 +127,7 @@ Future<File?> showImagePickerBottomSheet({
                 ),
                 title: FXText(
                   'กล้อง',
-                  size: fontSize,
+                  size: modalFontSize,
                   weight: FontWeight.bold,
                   color: fontColor,
                 ),
@@ -132,7 +144,7 @@ Future<File?> showImagePickerBottomSheet({
                 ),
                 title: FXText(
                   'แกลลอรี่',
-                  size: fontSize,
+                  size: modalFontSize,
                   weight: FontWeight.bold,
                   color: fontColor,
                 ),
@@ -224,18 +236,13 @@ getImageFromGallery(Color buttonColor) async {
 
 Future<File?> cameraCrop(
   filePath, {
-  required double ratioX,
-  required double ratioY,
+  CropAspectRatio? aspectRatio,
   String toolbarTitle = 'Crop Image',
   Color toolbarColor = Colors.red,
   Color toolbarWidgetColor = Colors.white,
   bool hideBottomControls = true,
-      bool lockAspectRatio = false,
+  bool lockAspectRatio = false,
 }) async {
-  var aspectRatio = CropAspectRatio(
-    ratioX: ratioX,
-    ratioY: ratioY,
-  );
   CroppedFile? croppedImage = await ImageCropper().cropImage(
     sourcePath: filePath,
     maxWidth: 720,
@@ -266,7 +273,15 @@ Future<File?> cameraCrop(
   return file;
 }
 
-Future<File?> galleryCrop(File imageFile) async {
+Future<File?> galleryCrop({
+  required File imageFile,
+  String toolbarTitle = 'Crop Image',
+  Color toolbarColor = Colors.red,
+  Color toolbarWidgetColor = Colors.white,
+  Color backgroundColor = Colors.black,
+  bool hideBottomControls = true,
+  bool lockAspectRatio = false,
+}) async {
   CroppedFile? croppedImage = await ImageCropper().cropImage(
     sourcePath: imageFile.path,
     aspectRatioPresets: [
@@ -281,11 +296,12 @@ Future<File?> galleryCrop(File imageFile) async {
         resetAspectRatioEnabled: false,
       ),
       AndroidUiSettings(
-        toolbarTitle: 'Crop Image',
-        toolbarColor: Colors.red,
-        toolbarWidgetColor: Colors.white,
-        initAspectRatio: CropAspectRatioPreset.original,
-        lockAspectRatio: false,
+        toolbarTitle: toolbarTitle,
+        toolbarColor: toolbarColor,
+        toolbarWidgetColor: toolbarWidgetColor,
+        backgroundColor: backgroundColor,
+        hideBottomControls: hideBottomControls,
+        lockAspectRatio: lockAspectRatio,
       ),
     ],
   );

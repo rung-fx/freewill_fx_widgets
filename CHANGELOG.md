@@ -85,3 +85,11 @@ device_info package version conflicts, package_info package version conflicts
 ## 1.2.7
 
 edit image picker crop function
+
+## 1.2.8
+
+edit image cropper aspect ratio
+
+## 1.2.9
+
+edit variable in camera cropper function
