@@ -97,3 +97,7 @@ edit variable in camera cropper function
 ## 1.2.10
 
 fix crop image resolution
+
+## 1.2.11
+
+fix compress quality and type file
