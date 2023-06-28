@@ -247,6 +247,8 @@ Future<File?> cameraCrop(
     sourcePath: filePath,
     aspectRatio: aspectRatio,
     cropStyle: CropStyle.rectangle,
+    compressFormat: ImageCompressFormat.png,
+    compressQuality: 100,
     uiSettings: [
       IOSUiSettings(
         rotateClockwiseButtonHidden: true,
