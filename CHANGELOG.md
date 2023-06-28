@@ -93,3 +93,7 @@ edit image cropper aspect ratio
 ## 1.2.9
 
 edit variable in camera cropper function
+
+## 1.2.10
+
+fix crop image resolution

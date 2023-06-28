@@ -245,8 +245,6 @@ Future<File?> cameraCrop(
 }) async {
   CroppedFile? croppedImage = await ImageCropper().cropImage(
     sourcePath: filePath,
-    maxWidth: 720,
-    maxHeight: 720,
     aspectRatio: aspectRatio,
     cropStyle: CropStyle.rectangle,
     uiSettings: [
