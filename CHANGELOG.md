@@ -101,3 +101,7 @@ fix crop image resolution
 ## 1.2.11
 
 fix compress quality and type file
+
+## 1.2.12
+
+edit image size from camera and gallery

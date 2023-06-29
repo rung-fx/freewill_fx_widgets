@@ -7,8 +7,6 @@ import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
-const double imageSize = 640.0;
-
 enum ImagePickerSource {
   camera,
   gallery,
@@ -27,6 +25,7 @@ Future<File?> showImagePickerBottomSheet({
   Color toolbarWidgetColor = Colors.white,
   bool hideBottomControls = true,
   bool lockAspectRatio = false,
+  double? imageSize,
 }) async {
   if (cropImage) {
     File? result = await Get.bottomSheet(
@@ -35,7 +34,7 @@ Future<File?> showImagePickerBottomSheet({
         child: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
+            children: [
               ListTile(
                 contentPadding: padding,
                 leading: Icon(
@@ -118,7 +117,7 @@ Future<File?> showImagePickerBottomSheet({
         child: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
+            children: [
               ListTile(
                 contentPadding: padding,
                 leading: Icon(
@@ -170,17 +169,20 @@ Future<File?> showImagePickerBottomSheet({
           ),
         );
       } else if (Platform.isIOS) {
-        pickedFile = await getImageFromCamera(iconColor);
+        pickedFile = await getImageFromCamera(buttonColor: iconColor);
       }
     } else if (result == ImagePickerSource.gallery) {
-      pickedFile = await getImageFromGallery(iconColor);
+      pickedFile = await getImageFromGallery(buttonColor: iconColor);
     }
 
     return pickedFile;
   }
 }
 
-getImageFromCamera(Color buttonColor) async {
+getImageFromCamera({
+  required Color buttonColor,
+  double? imageSize,
+}) async {
   bool cameraEnabled = await fxCanAccessCamera();
   File? file;
 
@@ -207,7 +209,10 @@ getImageFromCamera(Color buttonColor) async {
   return file;
 }
 
-getImageFromGallery(Color buttonColor) async {
+getImageFromGallery({
+  required Color buttonColor,
+  double? imageSize,
+}) async {
   bool galleryEnabled = await fxCanAccessGallery();
   File? file;
 
