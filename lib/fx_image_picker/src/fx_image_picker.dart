@@ -26,6 +26,7 @@ Future<File?> showImagePickerBottomSheet({
   bool hideBottomControls = true,
   bool lockAspectRatio = false,
   double? imageSize,
+  ResolutionPreset resolutionPreset = ResolutionPreset.medium,
 }) async {
   if (cropImage) {
     File? result = await Get.bottomSheet(
@@ -53,7 +54,7 @@ Future<File?> showImagePickerBottomSheet({
                   File? file = await Get.to(
                     () => FXCameraPage(
                       cameras: cameras,
-                      resolution: ResolutionPreset.medium,
+                      resolution: resolutionPreset,
                     ),
                   );
 
@@ -165,7 +166,7 @@ Future<File?> showImagePickerBottomSheet({
         pickedFile = await Get.to(
           () => FXCameraPage(
             cameras: cameras,
-            resolution: ResolutionPreset.medium,
+            resolution: resolutionPreset,
           ),
         );
       } else if (Platform.isIOS) {

@@ -105,3 +105,7 @@ fix compress quality and type file
 ## 1.2.12
 
 edit image size from camera and gallery
+
+## 1.2.13
+
+edit camera resolution
