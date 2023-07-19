@@ -8,11 +8,13 @@ import 'package:get/get.dart';
 class FXCameraPage extends StatefulWidget {
   final List<CameraDescription>? cameras;
   final ResolutionPreset resolution;
+  final bool enableAudio;
 
   const FXCameraPage({
     Key? key,
     required this.cameras,
     required this.resolution,
+    this.enableAudio = false,
   }) : super(key: key);
 
   @override
@@ -29,6 +31,7 @@ class _CameraPage extends State<FXCameraPage> {
     initCamera(
       widget.cameras![0],
       widget.resolution,
+      widget.enableAudio,
     );
   }
 
@@ -43,8 +46,15 @@ class _CameraPage extends State<FXCameraPage> {
   }
 
   Future initCamera(
-      CameraDescription camera, ResolutionPreset resolution) async {
-    _cameraController = CameraController(camera, resolution);
+    CameraDescription camera,
+    ResolutionPreset resolution,
+    bool enableAudio,
+  ) async {
+    _cameraController = CameraController(
+      camera,
+      resolution,
+      enableAudio: enableAudio,
+    );
 
     try {
       await _cameraController.initialize().then((_) {
@@ -79,11 +89,11 @@ class _CameraPage extends State<FXCameraPage> {
           (_cameraController.value.isInitialized)
               ? CameraPreview(_cameraController)
               : Container(
-            color: Colors.black,
-            child: const Center(
-              child: CircularProgressIndicator(),
-            ),
-          ),
+                  color: Colors.black,
+                  child: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -113,11 +123,13 @@ class _CameraPage extends State<FXCameraPage> {
               padding: const EdgeInsets.all(50.0),
               child: InkWell(
                 onTap: () {
-                  setState(
-                          () => _isRearCameraSelected = !_isRearCameraSelected);
+                  _isRearCameraSelected = !_isRearCameraSelected;
+                  setState(() {});
+
                   initCamera(
                     widget.cameras![_isRearCameraSelected ? 0 : 1],
-                    ResolutionPreset.medium,
+                    widget.resolution,
+                    widget.enableAudio,
                   );
                 },
                 child: const CircleAvatar(

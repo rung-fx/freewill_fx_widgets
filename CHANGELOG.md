@@ -112,4 +112,8 @@ edit camera resolution
 
 ## 1.2.14
 
+fix camera resolution bug
+
+## 1.2.15
+
 edit alert dialog font size
