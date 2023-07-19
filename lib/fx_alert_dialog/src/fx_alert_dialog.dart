@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 
 class FXAlertDialog extends StatelessWidget {
   final String title;
+  final double? contentFontSize;
+  final double? buttonFontSize;
   final String? content;
   final Color buttonColor;
   final Function()? onOK;
@@ -11,6 +13,8 @@ class FXAlertDialog extends StatelessWidget {
   const FXAlertDialog({
     Key? key,
     required this.title,
+    this.contentFontSize,
+    this.buttonFontSize,
     this.content,
     this.buttonColor = Colors.grey,
     this.onOK,
@@ -32,7 +36,7 @@ class FXAlertDialog extends StatelessWidget {
             FXText(
               title,
               color: Colors.black,
-              size: 16.0,
+              size: contentFontSize ?? 16.0,
               weight: FontWeight.bold,
               align: TextAlign.center,
             ),
@@ -76,10 +80,10 @@ class FXAlertDialog extends StatelessWidget {
                   horizontal: 10.0,
                   vertical: 8.0,
                 ),
-                child: const Center(
+                child: Center(
                   child: FXText(
                     'ตกลง',
-                    size: 14.0,
+                    size: buttonFontSize ?? 14.0,
                     weight: FontWeight.bold,
                     color: Colors.white,
                   ),

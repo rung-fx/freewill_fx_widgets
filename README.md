@@ -8,7 +8,7 @@ This package is simple widgets for FreewillFx Apps.
 
 ```
 dependencies:
-    freewill_fx_widgets: ^1.2.13
+    freewill_fx_widgets: ^1.2.14
 ```
 
 2. Import the package and use in your Flutter App

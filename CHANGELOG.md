@@ -109,3 +109,7 @@ edit image size from camera and gallery
 ## 1.2.13
 
 edit camera resolution
+
+## 1.2.14
+
+edit alert dialog font size
