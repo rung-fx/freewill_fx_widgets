@@ -117,3 +117,7 @@ fix camera resolution bug
 ## 1.2.15
 
 edit alert dialog font size
+
+## 1.2.16
+
+fix imagepicker image size bug

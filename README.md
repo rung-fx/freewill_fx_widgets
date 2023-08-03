@@ -8,7 +8,7 @@ This package is simple widgets for FreewillFx Apps.
 
 ```
 dependencies:
-    freewill_fx_widgets: ^1.2.15
+    freewill_fx_widgets: ^1.2.16
 ```
 
 2. Import the package and use in your Flutter App
@@ -75,7 +75,8 @@ Button that you can modify the style:
 
 In showImageBottomSheet -> cropImage = true
 
-Example: 
+Example:
+
 ```
 File? file = await showImagePickerBottomSheet(
     color: Colors.black,
@@ -87,7 +88,8 @@ setState(() => _image = file);
 
 ## QRCodeScanner
 
-Example: 
+Example:
+
 ```
 Barcode? result = await Get.to(() => FXQrScanner());
 

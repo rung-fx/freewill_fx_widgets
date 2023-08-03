@@ -170,10 +170,16 @@ Future<File?> showImagePickerBottomSheet({
           ),
         );
       } else if (Platform.isIOS) {
-        pickedFile = await getImageFromCamera(buttonColor: iconColor);
+        pickedFile = await getImageFromCamera(
+          buttonColor: iconColor,
+          imageSize: imageSize,
+        );
       }
     } else if (result == ImagePickerSource.gallery) {
-      pickedFile = await getImageFromGallery(buttonColor: iconColor);
+      pickedFile = await getImageFromGallery(
+        buttonColor: iconColor,
+        imageSize: imageSize,
+      );
     }
 
     return pickedFile;
