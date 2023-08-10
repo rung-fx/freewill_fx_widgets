@@ -129,3 +129,7 @@ select multiple image from gallery
 ## 1.2.18
 
 fix bug get multiple image from gallery
+
+## 1.2.19
+
+fig bug cannot get list of image

@@ -12,7 +12,7 @@ enum ImagePickerSource {
   gallery,
 }
 
-Future<File?> showImagePickerBottomSheet({
+Future<Object?> showImagePickerBottomSheet({
   required bool cropImage,
   Color iconColor = Colors.grey,
   Color fontColor = Colors.black,
@@ -160,6 +160,7 @@ Future<File?> showImagePickerBottomSheet({
     );
 
     File? pickedFile;
+    List<File> listPickedFile = [];
 
     if (result == ImagePickerSource.camera) {
       if (Platform.isAndroid) {
@@ -177,14 +178,26 @@ Future<File?> showImagePickerBottomSheet({
         );
       }
     } else if (result == ImagePickerSource.gallery) {
-      pickedFile = await getImageFromGallery(
-        buttonColor: iconColor,
-        imageSize: imageSize,
-        pickMultiple: pickMultiple,
-      );
+      if (pickMultiple) {
+        listPickedFile = await getImageFromGallery(
+          buttonColor: iconColor,
+          imageSize: imageSize,
+          pickMultiple: pickMultiple,
+        );
+      } else {
+        pickedFile = await getImageFromGallery(
+          buttonColor: iconColor,
+          imageSize: imageSize,
+          pickMultiple: pickMultiple,
+        );
+      }
     }
 
-    return pickedFile;
+    if (pickMultiple) {
+      return listPickedFile;
+    } else {
+      return pickedFile;
+    }
   }
 }
 
