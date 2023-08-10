@@ -171,11 +171,19 @@ Future<Object?> showImagePickerBottomSheet({
             resolution: resolutionPreset,
           ),
         );
+
+        if (pickMultiple) {
+          listPickedFile.add(pickedFile!);
+        }
       } else if (Platform.isIOS) {
         pickedFile = await getImageFromCamera(
           buttonColor: iconColor,
           imageSize: imageSize,
         );
+
+        if (pickMultiple) {
+          listPickedFile.add(pickedFile!);
+        }
       }
     } else if (result == ImagePickerSource.gallery) {
       if (pickMultiple) {
