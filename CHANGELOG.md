@@ -121,3 +121,7 @@ edit alert dialog font size
 ## 1.2.16
 
 fix imagepicker image size bug
+
+## 1.2.17
+
+select multiple image from gallery

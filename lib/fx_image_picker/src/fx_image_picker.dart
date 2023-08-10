@@ -27,6 +27,7 @@ Future<File?> showImagePickerBottomSheet({
   bool lockAspectRatio = false,
   double? imageSize,
   ResolutionPreset resolutionPreset = ResolutionPreset.medium,
+  bool pickMultiple = false,
 }) async {
   if (cropImage) {
     File? result = await Get.bottomSheet(
@@ -179,6 +180,7 @@ Future<File?> showImagePickerBottomSheet({
       pickedFile = await getImageFromGallery(
         buttonColor: iconColor,
         imageSize: imageSize,
+        pickMultiple: pickMultiple,
       );
     }
 
@@ -219,20 +221,35 @@ getImageFromCamera({
 getImageFromGallery({
   required Color buttonColor,
   double? imageSize,
+  bool pickMultiple = false,
 }) async {
   bool galleryEnabled = await fxCanAccessGallery();
   File? file;
 
   if (galleryEnabled) {
     final imagePicker = ImagePicker();
-    final pickedFile = await imagePicker.pickImage(
-      source: ImageSource.gallery,
-      maxHeight: imageSize,
-      maxWidth: imageSize,
-    );
 
-    if (pickedFile != null) {
-      file = File(pickedFile.path);
+    if (pickMultiple) {
+      final pickedFile = await imagePicker.pickMultiImage(
+        maxHeight: imageSize,
+        maxWidth: imageSize,
+      );
+
+      if (pickedFile.isNotEmpty) {
+        for (XFile data in pickedFile) {
+          file = File(data.path);
+        }
+      }
+    } else {
+      final pickedFile = await imagePicker.pickImage(
+        source: ImageSource.gallery,
+        maxHeight: imageSize,
+        maxWidth: imageSize,
+      );
+
+      if (pickedFile != null) {
+        file = File(pickedFile.path);
+      }
     }
   } else {
     Get.dialog(
