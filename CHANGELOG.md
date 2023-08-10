@@ -125,3 +125,7 @@ fix imagepicker image size bug
 ## 1.2.17
 
 select multiple image from gallery
+
+## 1.2.18
+
+fix bug get multiple image from gallery

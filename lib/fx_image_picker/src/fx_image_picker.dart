@@ -225,6 +225,7 @@ getImageFromGallery({
 }) async {
   bool galleryEnabled = await fxCanAccessGallery();
   File? file;
+  List<File> fileList = [];
 
   if (galleryEnabled) {
     final imagePicker = ImagePicker();
@@ -238,6 +239,7 @@ getImageFromGallery({
       if (pickedFile.isNotEmpty) {
         for (XFile data in pickedFile) {
           file = File(data.path);
+          fileList.add(file);
         }
       }
     } else {
@@ -260,7 +262,11 @@ getImageFromGallery({
     );
   }
 
-  return file;
+  if (pickMultiple) {
+    return fileList;
+  } else {
+    return file;
+  }
 }
 
 Future<File?> cameraCrop(
