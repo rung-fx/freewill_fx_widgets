@@ -137,3 +137,7 @@ fix bug cannot get list of image
 ## 1.2.20
 
 fix bug camera cannot get image when choose pick multiple image from gallery
+
+## 1.2.21
+
+edit loading dialog

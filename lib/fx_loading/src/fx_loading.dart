@@ -3,13 +3,36 @@ import 'package:freewill_fx_widgets/fx_text/fx_text.dart';
 import 'package:freewill_fx_widgets/value_constant.dart';
 import 'package:get/get.dart';
 
-class FXLoading extends StatelessWidget {
+class FXLoading extends StatefulWidget {
   final Color color;
 
   const FXLoading({
     Key? key,
     this.color = Colors.grey,
   }) : super(key: key);
+
+  @override
+  State<FXLoading> createState() => _FXLoadingState();
+}
+
+class _FXLoadingState extends State<FXLoading> {
+  String label = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _getLocale();
+  }
+
+  _getLocale() {
+    if (Get.locale.toString() == 'th_TH') {
+      label = 'กำลังโหลด';
+    } else {
+      label = 'Loading';
+    }
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +52,11 @@ class FXLoading extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               CircularProgressIndicator(
-                color: color,
+                color: widget.color,
               ),
               const SizedBox(height: marginX2),
-              const FXText(
-                'กำลังโหลด',
+              FXText(
+                label,
                 color: Colors.black,
                 weight: FontWeight.bold,
                 size: fontSizeM,
