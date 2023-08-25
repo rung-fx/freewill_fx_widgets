@@ -141,3 +141,7 @@ fix bug camera cannot get image when choose pick multiple image from gallery
 ## 1.2.21
 
 edit loading dialog
+
+## 1.2.22
+
+edit locale in loading dialog

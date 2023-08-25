@@ -25,10 +25,12 @@ class _FXLoadingState extends State<FXLoading> {
   }
 
   _getLocale() {
-    if (Get.locale.toString() == 'th_TH') {
+    if (Get.locale == const Locale('th_TH') || Get.locale == const Locale('th')) {
       label = 'กำลังโหลด';
-    } else {
+    } else if (Get.locale == const Locale('en_EN') || Get.locale == const Locale('en')) {
       label = 'Loading';
+    } else {
+      label = 'กำลังโหลด';
     }
 
     setState(() {});
