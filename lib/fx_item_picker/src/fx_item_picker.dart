@@ -30,12 +30,12 @@ class FXItemPicker extends StatefulWidget {
     required this.itemWidget,
     required this.tagWidget,
     required this.onSearch,
-    required this.maximumItem,
-    required this.pickMultipleItem,
+    this.maximumItem = 99,
+    this.pickMultipleItem = true,
     required this.selectedItems,
-    required this.enabledSelect,
-    required this.confirmButtonTestKey,
-    required this.showConfirmButton,
+    this.enabledSelect = true,
+    this.confirmButtonTestKey = '',
+    this.showConfirmButton = true,
     this.noDataText,
   }) : super(key: key);
 

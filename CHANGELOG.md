@@ -149,3 +149,7 @@ edit locale in loading dialog
 ## 1.3.0
 
 add submit button, ok cancel dialog, switch, otp textfield, toast message, back button, selected_button, item picker page & cell, search bar, calendar, bottom sheet
+
+## 1.3.1
+
+edit item picker page
