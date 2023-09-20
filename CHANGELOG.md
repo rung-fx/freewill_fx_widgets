@@ -157,3 +157,7 @@ edit item picker page
 ## 1.3.2
 
 edit button color
+
+## 1.3.3
+
+add gradient in ok cancel dialog

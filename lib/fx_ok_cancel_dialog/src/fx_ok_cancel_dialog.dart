@@ -13,6 +13,9 @@ class FXOkCancelDialog extends StatelessWidget {
   final Function()? onOK;
   final String? okText;
   final Color? okColor;
+  final bool isGradient;
+  final Color? gradientColor1;
+  final Color? gradientColor2;
   final bool showCancel;
   final String cancelTestKey;
   final Function()? onCancel;
@@ -29,6 +32,9 @@ class FXOkCancelDialog extends StatelessWidget {
     this.onOK,
     this.okText,
     this.okColor,
+    this.isGradient = false,
+    this.gradientColor1,
+    this.gradientColor2,
     this.showCancel = true,
     this.cancelTestKey = '',
     this.onCancel,
@@ -105,6 +111,9 @@ class FXOkCancelDialog extends StatelessWidget {
                 buttonPadding: EdgeInsets.zero,
                 buttonHeight: 45.0,
                 color: okColor ?? Colors.grey,
+                isGradient: isGradient,
+                gradientColor1: gradientColor1,
+                gradientColor2: gradientColor2,
               ),
             ),
             showCancel ? const SizedBox(width: margin) : const SizedBox(),
