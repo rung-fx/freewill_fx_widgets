@@ -161,3 +161,7 @@ edit button color
 ## 1.3.3
 
 add gradient in ok cancel dialog
+
+## 1.3.4
+
+fix bug gradient
