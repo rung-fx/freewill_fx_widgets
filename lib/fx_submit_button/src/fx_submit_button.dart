@@ -69,7 +69,7 @@ class FXSubmitButton extends StatelessWidget {
                     end: Alignment.centerRight,
                     colors: [
                       gradientColor1 ?? Colors.grey,
-                      gradientColor1 ?? Colors.grey.shade300,
+                      gradientColor2 ?? Colors.grey.shade300,
                     ],
                   )
                 : null,

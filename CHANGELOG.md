@@ -165,3 +165,7 @@ add gradient in ok cancel dialog
 ## 1.3.4
 
 fix bug gradient
+
+## 1.3.5
+
+fix bug gradient2
