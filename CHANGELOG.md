@@ -153,3 +153,7 @@ add submit button, ok cancel dialog, switch, otp textfield, toast message, back 
 ## 1.3.1
 
 edit item picker page
+
+## 1.3.2
+
+edit button color
