@@ -169,3 +169,7 @@ fix bug gradient
 ## 1.3.5
 
 fix bug gradient2
+
+## 1.3.6
+
+edit function in back button

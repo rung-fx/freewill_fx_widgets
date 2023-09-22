@@ -3,7 +3,7 @@ import 'package:freewill_fx_widgets/value_constant.dart';
 import 'package:get/get.dart';
 
 class FXBackButton extends StatelessWidget {
-  final Function()? onTap;
+  final Function() onTap;
   final bool showCircle;
   final double? height;
   final double? outerRadius;
@@ -18,7 +18,7 @@ class FXBackButton extends StatelessWidget {
 
   const FXBackButton({
     Key? key,
-    this.onTap,
+    required this.onTap,
     this.showCircle = false,
     this.height,
     this.outerRadius,
@@ -35,13 +35,7 @@ class FXBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        if (onTap != null) {
-          onTap!();
-        }
-
-        Get.back();
-      },
+      onTap: onTap,
       child: showCircle
           ? CircleAvatar(
               radius: outerRadius ?? 20.0,

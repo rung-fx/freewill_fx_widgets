@@ -83,7 +83,10 @@ class _FXItemPickerState extends State<FXItemPicker> {
       backgroundColor: Colors.white,
       extendBody: true,
       appBar: AppBar(
-        leading: const FXBackButton(
+        leading: FXBackButton(
+          onTap: () {
+            Get.back();
+          },
           showCircle: true,
           showBorder: true,
           iconColor: Colors.black,
