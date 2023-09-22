@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:freewill_fx_widgets/value_constant.dart';
-import 'package:get/get.dart';
 
 class FXBackButton extends StatelessWidget {
   final Function() onTap;
