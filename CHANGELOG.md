@@ -173,3 +173,7 @@ fix bug gradient2
 ## 1.3.6
 
 edit function in back button
+
+## 1.3.7
+
+add test key in back button

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freewill_fx_widgets/value_constant.dart';
 
 class FXBackButton extends StatelessWidget {
+  final String testKey;
   final Function() onTap;
   final bool showCircle;
   final double? height;
@@ -17,6 +18,7 @@ class FXBackButton extends StatelessWidget {
 
   const FXBackButton({
     Key? key,
+    this.testKey = '',
     required this.onTap,
     this.showCircle = false,
     this.height,
@@ -35,6 +37,7 @@ class FXBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
+      key: ValueKey(testKey),
       child: showCircle
           ? CircleAvatar(
               radius: outerRadius ?? 20.0,
