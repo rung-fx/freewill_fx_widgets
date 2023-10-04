@@ -9,9 +9,12 @@ import 'package:get/get.dart';
 
 class FXItemPicker extends StatefulWidget {
   final String title;
+  final Color? titleColor;
+  final double? titleSize;
   final String? hintText;
   final List items;
   final Widget Function(dynamic item, bool isSelected) itemWidget;
+  final bool showTag;
   final Widget Function(dynamic item) tagWidget;
   final dynamic Function(String searchText) onSearch;
   final int maximumItem;
@@ -26,9 +29,12 @@ class FXItemPicker extends StatefulWidget {
   const FXItemPicker({
     Key? key,
     required this.title,
+    this.titleColor,
+    this.titleSize,
     this.hintText,
     required this.items,
     required this.itemWidget,
+    this.showTag = true,
     required this.tagWidget,
     required this.onSearch,
     this.maximumItem = 99,
@@ -95,8 +101,8 @@ class _FXItemPickerState extends State<FXItemPicker> {
         ),
         title: FXText(
           widget.title,
-          color: Colors.black,
-          size: fontAppBar,
+          color: widget.titleColor ?? Colors.black,
+          size: widget.titleSize ?? fontAppBar,
           weight: FontWeight.bold,
         ),
         elevation: 0.0,
@@ -139,7 +145,7 @@ class _FXItemPickerState extends State<FXItemPicker> {
 
   _selectedTag() {
     return Visibility(
-      visible: widget.selectedItems.isNotEmpty,
+      visible: widget.selectedItems.isNotEmpty && widget.showTag,
       child: Column(
         children: [
           SizedBox(

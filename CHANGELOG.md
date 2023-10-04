@@ -185,3 +185,7 @@ add item picker cell
 ## 1.3.9
 
 edit padding item picker page
+
+## 1.3.10
+
+edit variable in item picker page
