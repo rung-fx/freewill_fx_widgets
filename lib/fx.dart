@@ -16,6 +16,7 @@ export 'fx_toast/fx_toast.dart';
 export 'fx_back_button/fx_back_button.dart';
 export 'fx_selected_button_list/fx_selected_button_list.dart';
 export 'fx_item_picker/fx_item_picker.dart';
+export 'fx_item_picker_cell/fx_item_picker_cell.dart';
 export 'fx_search_bar/fx_search_bar.dart';
 export 'fx_calendar/fx_calendar.dart';
 export 'fx_bottom_sheet/fx_bottom_sheet.dart';

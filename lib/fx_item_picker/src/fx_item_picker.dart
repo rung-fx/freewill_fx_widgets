@@ -21,6 +21,7 @@ class FXItemPicker extends StatefulWidget {
   final String confirmButtonTestKey;
   final bool showConfirmButton;
   final String? noDataText;
+  final String? confirmText;
 
   const FXItemPicker({
     Key? key,
@@ -37,6 +38,7 @@ class FXItemPicker extends StatefulWidget {
     this.confirmButtonTestKey = '',
     this.showConfirmButton = true,
     this.noDataText,
+    this.confirmText,
   }) : super(key: key);
 
   @override
@@ -104,6 +106,7 @@ class _FXItemPickerState extends State<FXItemPicker> {
       body: Column(
         children: [
           _searchBar(),
+          const SizedBox(height: margin),
           _selectedTag(),
           Expanded(
             child: _dataList(),
@@ -116,18 +119,21 @@ class _FXItemPickerState extends State<FXItemPicker> {
   }
 
   _searchBar() {
-    return FXSearchBar(
-      controller: _searchController,
-      hintText: widget.hintText ?? 'ค้นหา',
-      onChanged: (value) {
-        _filteredItems = widget.onSearch(value);
-        setState(() {});
-      },
-      onDelete: () {
-        _searchController.clear();
-        _filteredItems = widget.items;
-        setState(() {});
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: marginX2),
+      child: FXSearchBar(
+        controller: _searchController,
+        hintText: widget.hintText ?? 'ค้นหา',
+        onChanged: (value) {
+          _filteredItems = widget.onSearch(value);
+          setState(() {});
+        },
+        onDelete: () {
+          _searchController.clear();
+          _filteredItems = widget.items;
+          setState(() {});
+        },
+      ),
     );
   }
 
@@ -236,7 +242,7 @@ class _FXItemPickerState extends State<FXItemPicker> {
                 },
                 buttonMargin: const EdgeInsets.all(marginX2),
                 borderRadius: 10,
-                title: 'confirm'.tr,
+                title: widget.confirmText ?? 'ยืนยัน',
               )
             : FXSubmitButton(
                 onTap: () {},
@@ -248,7 +254,7 @@ class _FXItemPickerState extends State<FXItemPicker> {
                   color: Colors.grey.shade400,
                   width: 1.5,
                 ),
-                title: 'confirm'.tr,
+                title: widget.confirmText ?? 'ยืนยัน',
               ),
       ),
     );

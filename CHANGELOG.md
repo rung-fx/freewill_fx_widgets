@@ -177,3 +177,11 @@ edit function in back button
 ## 1.3.7
 
 add test key in back button
+
+## 1.3.8
+
+add item picker cell
+
+## 1.3.9
+
+edit padding item picker page
