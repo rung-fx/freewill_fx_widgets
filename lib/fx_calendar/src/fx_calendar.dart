@@ -4,13 +4,13 @@ import 'package:freewill_fx_widgets/value_constant.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-class CustomCalendar extends StatefulWidget {
+class FXCustomCalendar extends StatefulWidget {
   final DateTime selectedDate;
   final Color? selectedColor;
   final Color? rangeSelectedColor;
   final String? confirmText;
 
-  const CustomCalendar({
+  const FXCustomCalendar({
     Key? key,
     required this.selectedDate,
     this.selectedColor,
@@ -19,10 +19,10 @@ class CustomCalendar extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CustomCalendar> createState() => _CustomCalendarState();
+  State<FXCustomCalendar> createState() => _FXCustomCalendarState();
 }
 
-class _CustomCalendarState extends State<CustomCalendar> {
+class _FXCustomCalendarState extends State<FXCustomCalendar> {
   final DateRangePickerController _controller = DateRangePickerController();
   DateTime _selectedDate = DateTime.now();
 

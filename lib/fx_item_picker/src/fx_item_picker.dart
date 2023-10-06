@@ -12,10 +12,11 @@ class FXItemPicker extends StatefulWidget {
   final Color? titleColor;
   final double? titleSize;
   final String? hintText;
+  final double? hintSize;
   final List items;
   final Widget Function(dynamic item, bool isSelected) itemWidget;
   final bool showTag;
-  final Widget Function(dynamic item) tagWidget;
+  final Widget Function(dynamic item)? tagWidget;
   final dynamic Function(String searchText) onSearch;
   final int maximumItem;
   final bool pickMultipleItem;
@@ -32,10 +33,11 @@ class FXItemPicker extends StatefulWidget {
     this.titleColor,
     this.titleSize,
     this.hintText,
+    this.hintSize,
     required this.items,
     required this.itemWidget,
     this.showTag = true,
-    required this.tagWidget,
+    this.tagWidget,
     required this.onSearch,
     this.maximumItem = 99,
     this.pickMultipleItem = true,
@@ -71,7 +73,7 @@ class _FXItemPickerState extends State<FXItemPicker> {
     }
 
     _keyboardSubscription = KeyboardVisibilityController().onChange.listen(
-          (bool visible) {
+      (bool visible) {
         _keyboardIsVisible = visible;
         setState(() {});
       },
@@ -126,10 +128,11 @@ class _FXItemPickerState extends State<FXItemPicker> {
 
   _searchBar() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: marginX2),
+      padding: const EdgeInsets.all(marginX2),
       child: FXSearchBar(
         controller: _searchController,
         hintText: widget.hintText ?? 'ค้นหา',
+        hintSize: widget.hintSize,
         onChanged: (value) {
           _filteredItems = widget.onSearch(value);
           setState(() {});
@@ -144,49 +147,51 @@ class _FXItemPickerState extends State<FXItemPicker> {
   }
 
   _selectedTag() {
-    return Visibility(
-      visible: widget.selectedItems.isNotEmpty && widget.showTag,
-      child: Column(
-        children: [
-          SizedBox(
-            height: 65.0,
-            child: ListView.separated(
-              padding: const EdgeInsets.only(
-                left: marginX2,
-                right: marginX2,
-              ),
-              scrollDirection: Axis.horizontal,
-              itemCount: widget.selectedItems.length,
-              itemBuilder: (context, index) {
-                var item = widget.selectedItems[index];
+    return widget.tagWidget != null
+        ? Visibility(
+            visible: widget.selectedItems.isNotEmpty && widget.showTag,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 65.0,
+                  child: ListView.separated(
+                    padding: const EdgeInsets.only(
+                      left: marginX2,
+                      right: marginX2,
+                    ),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.selectedItems.length,
+                    itemBuilder: (context, index) {
+                      var item = widget.selectedItems[index];
 
-                return badges.Badge(
-                  onTap: () {
-                    widget.selectedItems.remove(item);
-                    setState(() {});
-                  },
-                  position: badges.BadgePosition.topEnd(top: -5, end: -8),
-                  badgeAnimation:
-                      const badges.BadgeAnimation.slide(toAnimate: false),
-                  badgeContent: const Icon(
-                    Icons.close_rounded,
-                    color: Colors.white,
-                    size: 16.0,
+                      return badges.Badge(
+                        onTap: () {
+                          widget.selectedItems.remove(item);
+                          setState(() {});
+                        },
+                        position: badges.BadgePosition.topEnd(top: -5, end: -8),
+                        badgeAnimation:
+                            const badges.BadgeAnimation.slide(toAnimate: false),
+                        badgeContent: const Icon(
+                          Icons.close_rounded,
+                          color: Colors.white,
+                          size: 16.0,
+                        ),
+                        badgeStyle: const badges.BadgeStyle(
+                            padding: EdgeInsets.all(2.0)),
+                        child: widget.tagWidget!(item),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(width: margin);
+                    },
                   ),
-                  badgeStyle:
-                      const badges.BadgeStyle(padding: EdgeInsets.all(2.0)),
-                  child: widget.tagWidget(item),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const SizedBox(width: margin);
-              },
+                ),
+                const SizedBox(height: margin),
+              ],
             ),
-          ),
-          const SizedBox(height: margin),
-        ],
-      ),
-    );
+          )
+        : const SizedBox();
   }
 
   _dataList() {

@@ -189,3 +189,7 @@ edit padding item picker page
 ## 1.3.10
 
 edit variable in item picker page
+
+## 1.3.11
+
+edit widget name

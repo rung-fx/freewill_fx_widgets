@@ -3,12 +3,12 @@ import 'package:freewill_fx_widgets/fx.dart';
 import 'package:freewill_fx_widgets/value_constant.dart';
 import 'package:get/get.dart';
 
-class ItemPickerCell extends StatelessWidget {
+class FXItemPickerCell extends StatelessWidget {
   final String title;
   final bool isSelected;
   final Color? selectedColor;
 
-  const ItemPickerCell({
+  const FXItemPickerCell({
     Key? key,
     required this.title,
     required this.isSelected,
