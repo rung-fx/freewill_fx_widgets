@@ -26,6 +26,7 @@ class FXItemPicker extends StatefulWidget {
   final bool showConfirmButton;
   final String? noDataText;
   final String? confirmText;
+  final Color? buttonColor;
 
   const FXItemPicker({
     Key? key,
@@ -47,6 +48,7 @@ class FXItemPicker extends StatefulWidget {
     this.showConfirmButton = true,
     this.noDataText,
     this.confirmText,
+    this.buttonColor,
   }) : super(key: key);
 
   @override
@@ -253,6 +255,7 @@ class _FXItemPickerState extends State<FXItemPicker> {
                 },
                 buttonMargin: const EdgeInsets.all(marginX2),
                 borderRadius: 10,
+                color: widget.buttonColor ?? Colors.grey,
                 title: widget.confirmText ?? 'ยืนยัน',
               )
             : FXSubmitButton(

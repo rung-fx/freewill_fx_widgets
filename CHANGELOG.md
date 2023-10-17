@@ -193,3 +193,7 @@ edit variable in item picker page
 ## 1.3.11
 
 edit widget name
+
+## 1.3.12
+
+edit item picker page submit button
