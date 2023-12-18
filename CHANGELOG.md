@@ -197,3 +197,7 @@ edit widget name
 ## 1.3.12
 
 edit item picker page submit button
+
+## 1.3.13
+
+alert dialog title color
