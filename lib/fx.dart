@@ -20,3 +20,4 @@ export 'fx_item_picker_cell/fx_item_picker_cell.dart';
 export 'fx_search_bar/fx_search_bar.dart';
 export 'fx_calendar/fx_calendar.dart';
 export 'fx_bottom_sheet/fx_bottom_sheet.dart';
+export 'fx_new_version/fx_new_version.dart';

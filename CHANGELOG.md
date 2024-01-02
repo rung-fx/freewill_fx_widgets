@@ -201,3 +201,7 @@ edit item picker page submit button
 ## 1.3.13
 
 alert dialog title color
+
+## 1.4.0
+
+add new version dialog
