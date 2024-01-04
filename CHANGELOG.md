@@ -217,3 +217,7 @@ fix bug new version dialog
 ## 1.4.3
 
 fix bug new version dialog
+
+## 1.4.4
+
+edit launcher

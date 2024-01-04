@@ -1,6 +1,6 @@
 name: freewill_fx_widgets
 description: Custom widgets for FreewillFx Co., Ltd.
-version: 1.4.3
+version: 1.4.4
 homepage: https://github.com/rung-fx/freewill_fx_widgets
 
 environment:
@@ -21,7 +21,7 @@ dependencies:
   badges: ^3.1.1
   flutter_keyboard_visibility: ^5.4.1
   syncfusion_flutter_datepicker: ^23.1.36
-  url_launcher:
+  open_store: ^0.5.0
 
 dev_dependencies:
   flutter_test:
