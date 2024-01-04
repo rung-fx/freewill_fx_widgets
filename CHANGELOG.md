@@ -205,3 +205,7 @@ alert dialog title color
 ## 1.4.0
 
 add new version dialog
+
+## 1.4.1
+
+remove new version checker
