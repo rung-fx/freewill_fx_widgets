@@ -71,7 +71,7 @@ showUpdateDialog({
                     ),
                   )
                 : const SizedBox(),
-            const SizedBox(width: marginX2),
+            updateLater ? const SizedBox(width: marginX2) : const SizedBox(),
             Expanded(
               child: FXSubmitButton(
                 onTap: () {
