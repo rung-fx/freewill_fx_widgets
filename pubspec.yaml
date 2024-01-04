@@ -21,8 +21,6 @@ dependencies:
   badges: ^3.1.1
   flutter_keyboard_visibility: ^5.4.1
   syncfusion_flutter_datepicker: ^23.1.36
-  flutter_secure_storage:
-  intl:
   url_launcher:
 
 dev_dependencies:
