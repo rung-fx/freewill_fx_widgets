@@ -8,7 +8,7 @@ This package is simple widgets for FreewillFx Apps.
 
 ```
 dependencies:
-    freewill_fx_widgets: ^1.4.1
+    freewill_fx_widgets: ^1.4.2
 ```
 
 2. Import the package and use in your Flutter App
@@ -138,3 +138,7 @@ Button that you can modify the style:
 ## BottomSheet 
 
 - Template of Bottom Sheet
+
+## NewVersionDialog
+
+_ show dialog when have new version

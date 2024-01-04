@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:freewill_fx_widgets/fx.dart';
 import 'package:freewill_fx_widgets/value_constant.dart';
@@ -7,7 +9,8 @@ import 'package:url_launcher/url_launcher.dart';
 showUpdateDialog({
   required String appName,
   required String version,
-  required String url,
+  required String androidUrl,
+  required String iOSUrl,
   Color appNameColor = Colors.black,
   bool updateLater = false,
   Color buttonColor = Colors.grey,
@@ -50,32 +53,42 @@ showUpdateDialog({
         Row(
           children: [
             updateLater
-                ? FXSubmitButton(
-                    onTap: () {
-                      Get.back();
-                    },
-                    title: laterText,
-                    borderRadius: 10,
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 1.5,
+                ? Expanded(
+                    child: FXSubmitButton(
+                      onTap: () {
+                        Get.back();
+                      },
+                      title: laterText,
+                      borderRadius: 10.0,
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 1.5,
+                      ),
+                      fontColor: Colors.grey,
+                      color: Colors.transparent,
+                      buttonPadding: EdgeInsets.zero,
+                      buttonHeight: 45.0,
                     ),
-                    fontColor: Colors.grey,
-                    color: Colors.transparent,
-                    buttonPadding: EdgeInsets.zero,
-                    buttonHeight: 45.0,
                   )
                 : const SizedBox(),
-            FXSubmitButton(
-              onTap: () {
-                Get.back();
-                launchUrl(Uri.parse(url));
-              },
-              title: updateText,
-              borderRadius: 10,
-              buttonPadding: EdgeInsets.zero,
-              buttonHeight: 45.0,
-              color: updateColor,
+            const SizedBox(width: marginX2),
+            Expanded(
+              child: FXSubmitButton(
+                onTap: () {
+                  Get.back();
+
+                  if (Platform.isAndroid) {
+                    launchUrl(Uri.parse(androidUrl));
+                  } else if (Platform.isIOS) {
+                    launchUrl(Uri.parse(iOSUrl));
+                  }
+                },
+                title: updateText,
+                borderRadius: 10.0,
+                buttonPadding: EdgeInsets.zero,
+                buttonHeight: 45.0,
+                color: updateColor,
+              ),
             ),
           ],
         ),

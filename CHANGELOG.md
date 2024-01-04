@@ -209,3 +209,7 @@ add new version dialog
 ## 1.4.1
 
 remove new version checker
+
+## 1.4.2
+
+fix bug new version dialog
