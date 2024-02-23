@@ -14,6 +14,7 @@ enum ImagePickerSource {
 
 Future<Object?> showImagePickerBottomSheet({
   required bool cropImage,
+  required bool useImagePicker,
   Color iconColor = Colors.grey,
   Color fontColor = Colors.black,
   EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: marginX2),
@@ -25,7 +26,9 @@ Future<Object?> showImagePickerBottomSheet({
   Color toolbarWidgetColor = Colors.white,
   bool hideBottomControls = true,
   bool lockAspectRatio = false,
-  double? imageSize,
+  double? imageHeight,
+  double? imageWidth,
+  int? imageQuality,
   ResolutionPreset resolutionPreset = ResolutionPreset.medium,
   bool pickMultiple = false,
 }) async {
@@ -88,8 +91,9 @@ Future<Object?> showImagePickerBottomSheet({
                 onTap: () async {
                   final file = await ImagePicker().pickImage(
                     source: ImageSource.gallery,
-                    maxHeight: imageSize,
-                    maxWidth: imageSize,
+                    maxHeight: imageHeight,
+                    maxWidth: imageWidth,
+                    imageQuality: imageQuality,
                   );
 
                   image = await cameraCrop(
@@ -164,21 +168,36 @@ Future<Object?> showImagePickerBottomSheet({
 
     if (result == ImagePickerSource.camera) {
       if (Platform.isAndroid) {
-        final cameras = await availableCameras();
-        pickedFile = await Get.to(
-          () => FXCameraPage(
-            cameras: cameras,
-            resolution: resolutionPreset,
-          ),
-        );
+        if (useImagePicker) {
+          pickedFile = await getImageFromCamera(
+            buttonColor: iconColor,
+            imageHeight: imageHeight,
+            imageWidth: imageWidth,
+            imageQuality: imageQuality,
+          );
 
-        if (pickMultiple) {
-          listPickedFile.add(pickedFile!);
+          if (pickMultiple) {
+            listPickedFile.add(pickedFile!);
+          }
+        } else {
+          final cameras = await availableCameras();
+          pickedFile = await Get.to(
+            () => FXCameraPage(
+              cameras: cameras,
+              resolution: resolutionPreset,
+            ),
+          );
+
+          if (pickMultiple) {
+            listPickedFile.add(pickedFile!);
+          }
         }
       } else if (Platform.isIOS) {
         pickedFile = await getImageFromCamera(
           buttonColor: iconColor,
-          imageSize: imageSize,
+          imageHeight: imageHeight,
+          imageWidth: imageWidth,
+          imageQuality: imageQuality,
         );
 
         if (pickMultiple) {
@@ -189,13 +208,17 @@ Future<Object?> showImagePickerBottomSheet({
       if (pickMultiple) {
         listPickedFile = await getImageFromGallery(
           buttonColor: iconColor,
-          imageSize: imageSize,
+          imageHeight: imageHeight,
+          imageWidth: imageWidth,
+          imageQuality: imageQuality,
           pickMultiple: pickMultiple,
         );
       } else {
         pickedFile = await getImageFromGallery(
           buttonColor: iconColor,
-          imageSize: imageSize,
+          imageHeight: imageHeight,
+          imageWidth: imageWidth,
+          imageQuality: imageQuality,
           pickMultiple: pickMultiple,
         );
       }
@@ -211,7 +234,9 @@ Future<Object?> showImagePickerBottomSheet({
 
 getImageFromCamera({
   required Color buttonColor,
-  double? imageSize,
+  double? imageHeight,
+  double? imageWidth,
+  int? imageQuality,
 }) async {
   bool cameraEnabled = await fxCanAccessCamera();
   File? file;
@@ -220,8 +245,9 @@ getImageFromCamera({
     final imagePicker = ImagePicker();
     final pickedFile = await imagePicker.pickImage(
       source: ImageSource.camera,
-      maxHeight: imageSize,
-      maxWidth: imageSize,
+      maxHeight: imageHeight,
+      maxWidth: imageWidth,
+      imageQuality: imageQuality,
     );
 
     if (pickedFile != null) {
@@ -241,8 +267,10 @@ getImageFromCamera({
 
 getImageFromGallery({
   required Color buttonColor,
-  double? imageSize,
   bool pickMultiple = false,
+  double? imageHeight,
+  double? imageWidth,
+  int? imageQuality,
 }) async {
   bool galleryEnabled = await fxCanAccessGallery();
   File? file;
@@ -253,8 +281,9 @@ getImageFromGallery({
 
     if (pickMultiple) {
       final pickedFile = await imagePicker.pickMultiImage(
-        maxHeight: imageSize,
-        maxWidth: imageSize,
+        maxHeight: imageHeight,
+        maxWidth: imageWidth,
+        imageQuality: imageQuality,
       );
 
       if (pickedFile.isNotEmpty) {
@@ -266,8 +295,9 @@ getImageFromGallery({
     } else {
       final pickedFile = await imagePicker.pickImage(
         source: ImageSource.gallery,
-        maxHeight: imageSize,
-        maxWidth: imageSize,
+        maxHeight: imageHeight,
+        maxWidth: imageWidth,
+        imageQuality: imageQuality,
       );
 
       if (pickedFile != null) {

@@ -221,3 +221,7 @@ fix bug new version dialog
 ## 1.4.4
 
 edit launcher
+
+## 1.4.5
+
+edit camera lib
