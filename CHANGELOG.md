@@ -229,3 +229,7 @@ edit camera lib
 ## 1.4.6
 
 update version of lib
+
+## 1.4.7
+
+update version of lib
