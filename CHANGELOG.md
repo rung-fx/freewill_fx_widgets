@@ -225,3 +225,7 @@ edit launcher
 ## 1.4.5
 
 edit camera lib
+
+## 1.4.6
+
+update version of lib
