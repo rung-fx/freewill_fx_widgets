@@ -57,7 +57,7 @@ class FXSearchBar extends StatelessWidget {
                       color: Colors.black,
                     ),
                   )
-                : const SizedBox(),
+                : null,
         hintText: hintText,
         hintStyle: TextStyle(
           color: Colors.grey,

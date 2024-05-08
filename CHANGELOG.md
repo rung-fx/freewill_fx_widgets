@@ -233,3 +233,7 @@ update version of lib
 ## 1.4.7
 
 update version of lib
+
+## 1.4.8
+
+edit serac hbar suffix icon
