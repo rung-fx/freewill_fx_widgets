@@ -236,4 +236,8 @@ update version of lib
 
 ## 1.4.8
 
-edit serac hbar suffix icon
+edit search bar suffix icon
+
+## 1.4.9
+
+remove qr scanner
