@@ -241,3 +241,7 @@ edit search bar suffix icon
 ## 1.4.9
 
 remove qr scanner
+
+## 1.4.10
+
+update version of lib

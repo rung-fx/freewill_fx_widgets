@@ -332,7 +332,6 @@ Future<File?> cameraCrop(
   CroppedFile? croppedImage = await ImageCropper().cropImage(
     sourcePath: filePath,
     aspectRatio: aspectRatio,
-    cropStyle: CropStyle.rectangle,
     compressFormat: ImageCompressFormat.png,
     compressQuality: 100,
     uiSettings: [
@@ -370,12 +369,6 @@ Future<File?> galleryCrop({
 }) async {
   CroppedFile? croppedImage = await ImageCropper().cropImage(
     sourcePath: imageFile.path,
-    aspectRatioPresets: [
-      CropAspectRatioPreset.original,
-      CropAspectRatioPreset.square,
-      CropAspectRatioPreset.ratio3x2,
-      CropAspectRatioPreset.ratio4x3,
-    ],
     uiSettings: [
       IOSUiSettings(
         aspectRatioLockEnabled: false,
