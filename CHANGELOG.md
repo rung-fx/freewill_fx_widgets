@@ -245,3 +245,7 @@ remove qr scanner
 ## 1.4.10
 
 update version of lib
+
+## 1.4.11
+
+fixed bug fx_image_picker

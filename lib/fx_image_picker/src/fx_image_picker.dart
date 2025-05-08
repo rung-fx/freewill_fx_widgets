@@ -176,8 +176,8 @@ Future<Object?> showImagePickerBottomSheet({
             imageQuality: imageQuality,
           );
 
-          if (pickMultiple) {
-            listPickedFile.add(pickedFile!);
+          if (pickMultiple && pickedFile != null) {
+            listPickedFile.add(pickedFile);
           }
         } else {
           final cameras = await availableCameras();
@@ -200,8 +200,8 @@ Future<Object?> showImagePickerBottomSheet({
           imageQuality: imageQuality,
         );
 
-        if (pickMultiple) {
-          listPickedFile.add(pickedFile!);
+        if (pickMultiple && pickedFile != null) {
+          listPickedFile.add(pickedFile);
         }
       }
     } else if (result == ImagePickerSource.gallery) {
